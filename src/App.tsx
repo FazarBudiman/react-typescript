@@ -1,11 +1,16 @@
-import React, { FC } from 'react';
+import * as React from 'react';
+import Login from './pages/Login';
+import DashboardAdmin from './pages/admin/DashboardAdmin';
+import Router from './router/Router';
 
-const  App: FC = (props) => {
-  return (
-    <div className="App">
-      <h1>Welcome to Ruangguru Bitch !!!!</h1>
-    </div>
-  );
+export interface IAppProps {
 }
 
-export default App;
+export default class App extends React.Component<IAppProps> {
+  public render() {
+    return (
+        <Router />
+    );
+  }
+}
+
