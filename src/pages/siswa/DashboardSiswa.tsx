@@ -5,7 +5,7 @@ import Navbar from '../../components/Navbar';
 import Footbar from '../../components/Footbar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBarsProgress, faChalkboardUser, faTimeline} from '@fortawesome/free-solid-svg-icons';
-import {Outlet, useNavigate} from 'react-router-dom'
+import {Outlet, useNavigate, useParams} from 'react-router-dom'
 import HeroWelcome from '../../components/HeroWelcome';
 
 const { Content, Sider } = Layout;
@@ -32,15 +32,16 @@ const items: MenuItem[] = [
   getItem('Progress Belajar', '3', <FontAwesomeIcon icon={faBarsProgress} />),
 ];
 
-
 const DashboardSiswa: React.FC = () => {
   const [collapsed, setCollapsed] = useState(false);
   const [heroHemo, setHeroHome] = useState(true)
   const navigate = useNavigate()
+  const params = useParams()
   
   const {
     token: { colorBgContainer },
   } = theme.useToken();
+  
 
   const handleSelect = (value: string) => {
     setHeroHome(false)
@@ -76,9 +77,9 @@ const DashboardSiswa: React.FC = () => {
         <Navbar />
         <Content style={{ margin: '0 16px' }}>
           <Breadcrumb style={{ margin: '16px 0' }}>
-            <Breadcrumb.Item>Student</Breadcrumb.Item>
-            <Breadcrumb.Item>Course</Breadcrumb.Item>
-            <Breadcrumb.Item>Bill</Breadcrumb.Item>
+            <Breadcrumb.Item>Dashboard</Breadcrumb.Item>
+            <Breadcrumb.Item>{params.course}</Breadcrumb.Item>
+            <Breadcrumb.Item>{params.materi}</Breadcrumb.Item>
           </Breadcrumb>
           <div style={{ padding: 24, minHeight: 360, background: colorBgContainer }}>
             {heroHemo === true? <HeroWelcome title='Selamat Belajar Siswa' desc='Tunjukkan kepada dunia kalau kamu bisa' /> : <Outlet />}

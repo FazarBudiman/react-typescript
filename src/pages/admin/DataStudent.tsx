@@ -1,73 +1,36 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {Table, Tag } from 'antd';
-
-const { Column } = Table;
+import type { ColumnsType } from 'antd/es/table';
+import axios from 'axios';
 
 interface DataType {
-  id: React.Key;
+  id_siswa: React.Key;
   nama: string;
   email: string;
-  subscription: boolean;
+  id_kategori_pengguna: number;
 }
 
-const data: DataType[] = [
+const  columns: ColumnsType<DataType> = [
   {
-    id: '1',
-    nama: 'John',
-    email: 'Brown@gmail.com',
-    subscription: true,
+    title: 'Nama',
+    key:'nama',
+    dataIndex: 'nama'
   },
   {
-    id: '2',
-    nama: 'John wick',
-    email: 'BrownWick@gmail.com',
-    subscription: false,
+    title: 'Email',
+    dataIndex: 'email',
+    key:'email'
   },
   {
-    id: '1',
-    nama: 'John',
-    email: 'Brown@gmail.com',
-    subscription: true,
-  },
-  {
-    id: '2',
-    nama: 'John wick',
-    email: 'BrownWick@gmail.com',
-    subscription: false,
-  },
-  {
-    id: '1',
-    nama: 'John',
-    email: 'Brown@gmail.com',
-    subscription: true,
-  },
-  {
-    id: '2',
-    nama: 'John wick',
-    email: 'BrownWick@gmail.com',
-    subscription: false,
-  },
-  {
-    id: '2',
-    nama: 'John wick',
-    email: 'BrownWick@gmail.com',
-    subscription: false,
-  },
-
-];
-
-const DataStudent: React.FC = () => {
-  return (
-  <Table dataSource={data} scroll={{y: 360}} >
-    <Column title="Nama" dataIndex="nama" key="nama" />
-    <Column title="Email" dataIndex="email" key="email" />
-    <Column
-      title="Subscription"
-      dataIndex="subscription"
-      key="subscription"
-      render={(subscription: boolean) => (
-        <>
-            {subscription === true ? 
+    title: 'Subscription',
+    dataIndex: 'id_kategori_pengguna',
+    key: 'id_kategori_pengguna',
+    defaultSortOrder: 'ascend',
+    sorter: (a, b) => a.id_kategori_pengguna - b.id_kategori_pengguna,
+    render(value, record, index) {
+        return (
+          <>
+            {value === 4 ? 
                 <Tag color="blue" >
                     Subscribe
                 </Tag> : 
@@ -75,16 +38,38 @@ const DataStudent: React.FC = () => {
                     Not Subscribe
                 </Tag>
             }
-        </>
-      )}
-    />
-    <Column
-      title="Action"
-      key="action"
-      render={() => (
-        <a>Delete</a>
-      )}
-    />
+          </>
+        )
+    },
+  },
+  {
+    title: 'Action',
+    key:'id_siswa',
+    dataIndex: 'id_siswa',
+    render(value) {
+      return (
+        <a onClick={() => alert(value)}>Delete</a>
+      )
+    }
+  }
+
+]
+
+
+const DataStudent: React.FC = () => {
+  const [dataStudent, setDataStudent] = useState<Array<any> | undefined>([{}])
+  useEffect(() => {
+    axios.get('http://localhost:5432/student')
+    .then(res => {
+      console.log(res.data)
+      setDataStudent([])
+      setDataStudent(res.data)
+    } )
+    .catch(err => console.log(err.message))
+  },[])
+  return (
+  <Table dataSource={dataStudent} scroll={{y: 360}} columns={columns} >
+    
   </Table>
   )
 };

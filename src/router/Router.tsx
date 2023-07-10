@@ -38,8 +38,8 @@ const Router: React.FunctionComponent<RouterProps> = () => {
                     <Route path="/dashboard/course/materi" element={<Materi />} />
                 </Route> */}
                 <Route path="/dashboard/course" element={<Course />} />
-                <Route path="/dashboard/course/materi" element={<Materi />} />
-                <Route path="/dashboard/course/materi/video-materi" element={<VideoMateri />} />
+                <Route path="/dashboard/course/:course/materi" element={<Materi />} />
+                <Route path="/dashboard/course/:course/materi/:materi" element={<VideoMateri />} />
                 <Route path="/dashboard/learning-path" element={<LearningPath />} />
                 <Route path="/dashboard/progress-belajar" element={<ProgressBelajar />} />
             </Route>

@@ -84,7 +84,7 @@ export default class ItemForm extends Component<Props, State> {
 
   buttonFinish = (
           <Form.Item>
-            <Button htmlType='submit' type='primary' style={{width: '100%', }}>Add</Button>
+            <Button htmlType='submit' type='primary' style={{width: '100%', }}>{this.props.title}</Button>
           </Form.Item>
   )
 
