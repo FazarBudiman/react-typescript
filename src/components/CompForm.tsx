@@ -23,7 +23,6 @@ const CompForm: React.FunctionComponent<IAppProps> = (props) => {
           alertSuccess.alert()
           let user1 = res.data.user[0]
           const userInstance = User.getInstance(user1.id, user1.nama, user1.email, user1.kata_sandi, user1.id_kategori_pengguna);
-
           setTimeout(() => {
             if (userInstance.getIdKategoriPengguna() === 1) {
               navigate('/manage-dashboard')

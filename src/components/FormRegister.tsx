@@ -5,17 +5,17 @@ import CompForm from './CompForm';
 
 
 const FormRegister: React.FC = () => {
-    const onFinish = (values: any) => {
-        console.log('Success:', values);
-      };
+    // const onFinish = (values: any) => {
+    //     console.log('Success:', values);
+    //   };
       
-    const onFinishFailed = (errorInfo: any) => {
-        console.log('Failed:', errorInfo);
-      };
+    // const onFinishFailed = (errorInfo: any) => {
+    //     console.log('Failed:', errorInfo);
+    //   };
 
     return (
         <div style={{padding: 70, }}>
-            <CompForm title='Register' />
+            <CompForm title='Register'/>
         </div>
     )
 }
